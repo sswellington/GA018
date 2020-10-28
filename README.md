@@ -14,12 +14,13 @@
 * Condicionamento de sistemas lineares
 * Sistema de Equações Lineares
 
-#### Métodos iterativos
-* Método da Bisseção
+### Iteração Linear
+* Ponto Fixo
 * Método de Jacobi
 * Método de Gauss-Seidel 
 
-### Sistema  não-lineares
+### Iteração  não-lineares
+* Método da Bisseção
 * Método de Newton
 
 ### Outros métodos
