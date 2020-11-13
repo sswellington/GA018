@@ -14,14 +14,18 @@
 * Condicionamento de sistemas lineares
 * Sistema de Equações Lineares
 
-### Iteração Linear
+### Métodos Numéricos
 * Ponto Fixo
 * Método de Jacobi
 * Método de Gauss-Seidel 
-
-### Iteração  não-lineares
 * Método da Bisseção
-* Método de Newton
+* Método de Newton-Raphson
+* Método da Secante
+* Spline Cúbico
+
+### Teoria da aproximação
+* Lei de Hooke 
+* Caso discreto - Métodos dos mínimos quadrados
 
 ### Outros métodos
 * Método de Leap-Frog
