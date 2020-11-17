@@ -1,44 +1,52 @@
-''' Método de Newton
-    * encontrar o mínimo dessa função:
-'''
+''' Método de Newton: encontrar o mínimo dessa função '''
 
+import csv
 from sympy import *
 
-MAX = 200
+MAX = 50
+PATH = 'log/newton/'
 TOLERANCE = 0.00000001 # 10**(-8)
 
-log = [] # x, erro
+log = [] # x, erro, fn, dx
 x = Symbol('x')
 
 
 def list_repr( list ) :
     c = 0  
     for l in list : 
-        print('i =', c, 'x =', l[0], 'e =', l[1] )   
+        print('i =', c, 'x =', l[0], 'e =', l[1], 'fx =', l[2], 'dx =', l[3])    
         c = c + 1 
     return list[-1]
 
 
-def newton(fn, y, tol, nmax) :
+def list2file( my_list, path ) :
+    with open(path, 'w', newline='') as csvfile:
+        spamwriter = csv.writer(csvfile, delimiter=',',
+                                quotechar='|', quoting=csv.QUOTE_MINIMAL)
+        spamwriter.writerow(['x', 'error', 'function', 'derivative'])
+        for l in my_list :
+            spamwriter.writerow(l)
+
+                                 
+def newton(fn, cx, tol, nmax) :
     previous = 0
     
     dx = fn.diff(x)
     dx = lambdify(x, dx)
     fn = lambdify(x, fn)
     
-    if (dx == 0) :
+    if (dx(cx) == 0) :
         return False
         breakpoint
         
     for n in range(nmax) : 
-        y = y - (fn(y) / dx(y) )
-        error = (abs(previous - y))
-        log.append([y, error])
-        
+        cx = cx - (fn(cx) / dx(cx) )
+        error = (abs(previous - cx))
+        log.append([cx, error, fn(cx), dx(cx)])
         if (error < tol) :
-            return y
+            return cx
             breakpoint
-        previous = y
+        previous = cx
         
     return False
       
@@ -54,10 +62,8 @@ if __name__ == "__main__":
     '''
     
     a = 0.0000001
-    f = ((cos(x)) - x**3 )
+    f =  (x**2 - 612)
 
-    r = newton(f, a, TOLERANCE, MAX)   
-    # print(r) 
-    
-    list_repr(log)
-    
+    print(newton(f, a, TOLERANCE, MAX))
+
+    list2file(log, (PATH+'xp2-612.csv') )
