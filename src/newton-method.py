@@ -15,12 +15,11 @@ def newton(fn, cx, tol, nmax) :
     dx = fn.diff(x)
     dx = lambdify(x, dx)
     fn = lambdify(x, fn)
-    
-    if (dx(cx) == 0) :
-        return False
-        breakpoint
-        
+     
     for n in range(nmax) : 
+        if (dx(cx) == 0) :
+            return "Error 21: derivative less than zero"
+            breakpoint
         cx = cx - (fn(cx) / dx(cx) )
         error = (abs(previous - cx))
         log.append([cx, error, fn(cx), dx(cx)])
@@ -51,4 +50,4 @@ if __name__ == "__main__":
     print(newton(f, a, TOLERANCE, MAX))
     
     t = Log(log)
-    t.list2file((PATH+'xp2-612.csv'), ['x', 'error', 'function', 'derivative'])
+    # t.list2file((PATH+'xp2-612.csv'), ['x', 'error', 'function', 'derivative'])

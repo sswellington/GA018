@@ -14,8 +14,8 @@ def function ( x ):
     return ( x**3 - x - 2 )
 
 
-def same_sign(a , c) :
-    return ((a * c) > 0)
+def same_sign(product_a , product_b) :
+    return ((product_a * product_b) > 0)
 
 
 def bisection (fn, a, b, tol, nmax):
@@ -27,10 +27,11 @@ def bisection (fn, a, b, tol, nmax):
             then selecting the subinterval in which the function changes sign, 
             and therefore must contain a root.
     '''
-    # check intermediate value theorem
+    # Bolzano's Theorem: check the intermediate value of functions a and b
     if same_sign(fn(a), fn(b)):
-        return False
+        return "Error 32: Bolzano of Theorem"
         breakpoint
+        
     # limit iterations to prevent infinit loop
     for n in range(nmax) : 
         # midpoint 
