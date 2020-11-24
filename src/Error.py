@@ -7,10 +7,10 @@ class Error(object):
         _absolute = -9.9
         _relative = -9.9 
     
-    def absolute(self, atual, previous) :
-        self._absolute = (abs(atual - previous))
+    def absolute(self, current, previous) :
+        self._absolute = (abs(current - previous))
         return self._absolute
     
-    def relative(self, atual, previous) :
-        self._relative = (abs(atual - previous)) / (abs(atual))
+    def relative(self, current, previous) :
+        self._relative = (abs(current - previous)) / (abs(current))
         return self._relative

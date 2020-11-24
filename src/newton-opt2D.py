@@ -32,14 +32,14 @@ def newton2D(fn, cx, cy, tol, nmax) :
     return cx
 
 if __name__ == "__main__" :
-    # euler = exp(-( ( ((x-1)**2)/(2*(0.75**2)) ) + ( ((y-2)**2)/(2*(0.5**2)) )  ))
-    # fn = 1 - euler + ( 0.04 * (((x-1)**2) + ((y-2)**2)) )
+    euler = exp(-( ( ((x-1)**2)/(2*(0.75**2)) ) + ( ((y-2)**2)/(2*(0.5**2)) )  ))
+    fn = 1 - euler + ( 0.04 * (((x-1)**2) + ((y-2)**2)) )
     
     log = [] # x, erro, fn, dx
     a = 0.0000001
     f =  (x**2 - 612)
 
-    
-    print( newton2D(f, a, 2, TOLERANCE, MAX) )
+    fn = (lambdify(['x','y'], fn))
+    print(fn(1,1))
     
     

@@ -1,9 +1,9 @@
 ''' Método de Newton: encontrar o mínimo dessa função '''
 
 from sympy import lambdify, diff, cos, sin
+from sympy.plotting import plot, plot3d
 from sympy.abc import x
 
-import matplotlib.pyplot as plt
 
 from Error import * 
 from Log import *
@@ -50,8 +50,15 @@ def run_test(function, a, TOLERANCE, MAX):
 if __name__ == "__main__":
     ''' Tests '''
     a = 0.5
-    fx = [(cos(x) - x**3), (x**2 - 612), ((x**3)-(2*x)+2), (x**6 - x - 1), ((3*(x**3))-2)]
+    fx = [(cos(x) - x**3), ((x**3)-(2*x)+2), (x**2-4*x-5), (x ** 2 - 10), 
+          (x**2 - 612), (x ** 3 - 2 * x - 5),((3*(x**3))-2), (x**6 - x - 1), (x**2-4*x-5)]
     
     for f in fx:
         r = run_test(f, a, TOLERANCE, MAX)
+        # graph = plot(f, show=False)
+        # graph.save('view/function/'+str(f))
+        
+        # graph = plot3d(f, show=False)
+        # graph.save('view/function/3D/'+str(f))
+
         
