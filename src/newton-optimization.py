@@ -12,7 +12,8 @@ PATH = 'log/newton-opt/'
 TOLERANCE = 0.00000001 # 10**(-8)
                                  
                                  
-def newton_optimization(fn, cx, tol, nmax, log) :
+def newton_optimization(fn, cx, tol, nmax) :
+    l = Log()
     e = Error()
     previous = 0
     
@@ -28,8 +29,10 @@ def newton_optimization(fn, cx, tol, nmax, log) :
             breakpoint
         cx = cx - (dx(cx) / dx2(cx) )
         e.absolute(cx, previous)
-        log.append([cx, e._absolute, dx(cx), dx2(cx)])
+        l.append([cx, e._absolute, dx(cx), dx2(cx)])
         if (e._absolute < tol) :
+            l.set_header(['x', 'absolute_error', 'function', 'derivative'])
+            l.list2file((PATH+str(fn)))
             return cx
             breakpoint
         previous = cx
@@ -37,15 +40,9 @@ def newton_optimization(fn, cx, tol, nmax, log) :
 
 
 def run_test(function, a, TOLERANCE, MAX): 
-
-    log = []
-    m = newton_optimization(function, a, TOLERANCE, MAX, log)
-    
-    l = Log(log)
-    l.set_header(['x='+str(a), 'absolute_error', 'function', 'derivative'])
-    l.list2file((PATH+str(function)))
-
+    m = newton_optimization(function, a, TOLERANCE, MAX)
     print('f(x) =',function, '-> newton optimization =', m)
+    return m
 
 
 

@@ -10,12 +10,15 @@ PATH = 'log/secant/'
 TOLERANCE = 0.00000001 # 10**(-8)
 
 
-def secant(f, a, b, tol, nmax, log):
+def secant(f, a, b, tol, nmax):
     ''' Secant method
         Return the root calculated using the secant method.
     '''
+    l = Log()
     e = Error()
     previous = 0
+    fn = f 
+    
     f = lambdify(x, f)
     if (f(a) == f(b)) :
         return 'Error 20: a and b functions have the same value'
@@ -24,8 +27,10 @@ def secant(f, a, b, tol, nmax, log):
         c = b - f(b) * (b - a) / (float(f(b) - f(a)))
         e.absolute(c, previous)
         e.relative(c, previous)
-        log.append([c, e._absolute, e._relative, f(a), f(b)])
+        l.append([c, e._absolute, e._relative, f(a), f(b)])
         if (e._absolute < tol) :
+            l.set_header(['x', 'absolute_error', 'relative_error', 'function(a)', 'function(b)'])
+            l.list2file((PATH+str(fn)))
             return c
             breakpoint
         a, b = b, c
@@ -33,14 +38,9 @@ def secant(f, a, b, tol, nmax, log):
     return False
 
 def run_test(function, a, b, TOLERANCE, MAX):
-    log = []
-    m = secant(function, a, b, TOLERANCE, MAX, log)
-    
-    l = Log(log)
-    l.set_header(['x='+str(a), 'absolute_error', 'relative_error', 'function', 'derivative'])
-    l.list2file((PATH+str(function)))
-
+    m = secant(function, a, b, TOLERANCE, MAX)
     print('f(x) =',function,' >>> secant =', m)
+    return m
 
 if __name__ == "__main__":
     a = 0.5

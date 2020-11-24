@@ -1,12 +1,13 @@
 import csv
 
+
 class Log(object):
-    
-    _list = []
     _header = None
     
-    def __init__(self, list):
-        self._list = list
+    
+    def __init__(self):
+        self._list = []
+
 
     def __repr__(self):
         return self._list
@@ -14,10 +15,13 @@ class Log(object):
 
     def set_header(self, header): 
         self._header = header
-
+    
+    
+    def append(self, value): 
+        self._list.append( value)
+        
     
     def list2file(self, path):
-             
         with open(path+'.csv', 'w', newline='') as csvfile:
             spamwriter = csv.writer(csvfile, delimiter=',',
                                     quotechar='|', quoting=csv.QUOTE_MINIMAL)
