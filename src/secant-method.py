@@ -1,29 +1,51 @@
+from sympy import lambdify, diff, cos, sin
+from sympy.abc import x
+
+from Error import * 
+from Log import *
+
+
 MAX = 50
+PATH = 'log/secant/'
 TOLERANCE = 0.00000001 # 10**(-8)
 
 
-def function ( x ): 
-    return x ** 2 - 612
-
-
-def secant_method(f, a, b, tol, nmax):
+def secant(f, a, b, tol, nmax, log):
     ''' Secant method
         Return the root calculated using the secant method.
     '''
+    e = Error()
     previous = 0
+    f = lambdify(x, f)
+    if (f(a) == f(b)) :
+        return 'Error 20: a and b functions have the same value'
+        breakpoint
     for i in range(nmax):
         c = b - f(b) * (b - a) / (float(f(b) - f(a)))
-        error = (abs(previous - c))
-        log.append([c, error, f(a), f(b)])
-        if (error < tol) :
+        e.absolute(c, previous)
+        e.relative(c, previous)
+        log.append([c, e._absolute, e._relative, f(a), f(b)])
+        if (e._absolute < tol) :
             return c
             breakpoint
         a, b = b, c
         previous = c
     return False
 
+def run_test(function, a, b, TOLERANCE, MAX):
+    log = []
+    m = secant(function, a, b, TOLERANCE, MAX, log)
+    
+    l = Log(log)
+    l.set_header(['x='+str(a), 'absolute_error', 'relative_error', 'function', 'derivative'])
+    l.list2file((PATH+str(function)))
+
+    print('f(x) =',function,' >>> secant =', m)
 
 if __name__ == "__main__":
-    log = [] # x, erro, fn_a, fn_b
+    a = 0.5
+    fx = [(cos(x) - x**3), (x**2 - 612), ((x**3)-(2*x)+2), (x**6 - x - 1)]
+    fn = (cos(x) - x**3)
 
-    print(secant_method(function, 10, 30, TOLERANCE, MAX))
+    for f in fx:
+        run_test(f, a, a*2, TOLERANCE, MAX)
