@@ -1,12 +1,6 @@
 from sympy import Function, hessian, pprint
 from sympy.abc import x, y
 
-
-f = Function('f')(x, y)
-g1 = Function('g')(x, y)
-g2 = x**2 + 3*y
-
-
 ''' Hessian matrix 
     Compute Hessian matrix 
     for a function f wrt parameters in varlist 
@@ -16,4 +10,9 @@ g2 = x**2 + 3*y
     References:  https://en.wikipedia.org/wiki/Hessian_matrix
 '''
 
-print(hessian(f, (x, y), [g1, g2]))
+if __name__ == "__main__" :
+    
+    # f = 2*x - y + 2*x*y - x**2 - y**2
+    f = x**2 + y**2
+
+    print((hessian(f, (x, y))).inv())
