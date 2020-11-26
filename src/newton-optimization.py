@@ -1,6 +1,6 @@
 ''' Método de Newton: encontrar o mínimo dessa função '''
 
-from sympy import lambdify, diff, cos, sin
+from sympy import lambdify, diff, cos, sin, exp
 from sympy.abc import x
 
 from Error import * 
@@ -53,8 +53,11 @@ if __name__ == "__main__":
     '''
     
     log = []
-    a = .05
-    fx = [(cos(x) - x**3), (x**2 - 612), ((x**3)-(2*x)+2), (x**6 - x - 1)]
+    a = .0000005
+    fx = [(cos(x) - x**3), (x**2 - 612), ((x**3)-(2*x)+2), (x**6 - x - 1), (x**3-6*x**2+4*x+2)]
     
+    euler = exp(-( ( ((x-1)**2)/(2*(0.75**2)) ) + ( ((x-2)**2)/(2*(0.5**2)) )  ))
+    fx = [1 - euler + ( 0.04 * (((x-1)**2) + ((x-2)**2)) )]
+   
     for f in fx:
         run_test(f, a, TOLERANCE, MAX)

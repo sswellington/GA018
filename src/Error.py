@@ -1,5 +1,5 @@
 class Error(object):
-    
+    ''' https://en.wikipedia.org/wiki/Approximation_error '''
     _absolute = None
     _relative = None
     
@@ -12,5 +12,8 @@ class Error(object):
         return self._absolute
     
     def relative(self, current, previous) :
-        self._relative = (abs(current - previous)) / (abs(current))
+        if (current == 0):
+            return ('Error 16: Current is equal 0.0') 
+            breakpoint
+        self._relative = abs( 1 -  (previous/current))
         return self._relative

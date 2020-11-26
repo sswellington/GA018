@@ -1,6 +1,6 @@
 ''' Método de Newton: encontrar o mínimo dessa função '''
 
-from sympy import lambdify, diff, cos, sin
+from sympy import lambdify, diff, cos, sin, exp
 from sympy.plotting import plot, plot3d
 from sympy.abc import x
 
@@ -53,9 +53,8 @@ if __name__ == "__main__":
     fx = [(cos(x) - x**3), ((3*(x**3))-2), (6*(x**2) - 400),
           (x**2 - 4*x -5), (x ** 2 - 10), (x**2 - 612), 
           (x**3 - 1),(x ** 3 - 2 * x - 5), ((x**3)-(2*x)+2), 
+          (x**3-6*x**2+4*x+2), (x**3 - x**2 - 1), 
           (x**6 - x - 1)]
-    
-    
         
     for f in fx:
         r = run_test(f, a, TOLERANCE, MAX)
