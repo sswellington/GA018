@@ -15,7 +15,7 @@ from Log import *
 '''
 
 MAX = 1
-PATH = 'log/newton/'
+# PATH = 'log/newton/opt/'
 TOLERANCE = 0.00000001 # 10**(-8)
 
 
@@ -40,18 +40,17 @@ def optimization(f, cx, cy, tol, nmax) :
     print('XY =', xy.shape)
     
     for n in range(nmax) : 
-        hessiana = h(xy[0], xy[1])
-        jj = j(xy[0], xy[1])
+        hessiana = h(float(xy[0]), float(xy[1]))
+        jj = j(float(xy[0]), float(xy[1]))
         root = (xy) - (Matrix(hessiana) * Matrix(jj)) 
         print('hessiana = ',hessiana.shape )
         print('jacobian = ',jj.shape)
         print('kernel', root) 
         
-        # print('kernel =', kernel)
-        # # print(xy[0], xy[1])
-        # print('hessiana = ',hessiana)
-        # print('jacobian = ',jj)
-    
+        print('kernel =', root)
+        print(xy[0], xy[1])
+        print('hessiana = ',hessiana)
+        print('jacobian = ',jj)
     return (xy)
 
 
@@ -59,10 +58,12 @@ if __name__ == "__main__" :
     # euler = exp(-( ( ((x-1)**2)/(2*(0.75**2)) ) + ( ((y-2)**2)/(2*(0.5**2)) )  ))
     # f = 1 - euler + ( 0.04 * (((x-1)**2) + ((y-2)**2)) )
     
-    # f = 1 - (exp(-( ( ((x-1)**2)/(2*(0.75**2)) ) + ( ((y-2)**2)/(2*(0.5**2)) )  ))) + ( 0.04 * (((x-1)**2) + ((y-2)**2)) )
-     
-    f = x**2 * y**3
-        
-    r = optimization(f, 5, 2, TOLERANCE, MAX)
+    # print(euler)
     
-    # print(r)
+    f = 1 - (exp(-( ( ((x-1)**2)/(2*(0.75**2)) ) + ( ((y-2)**2)/(2*(0.5**2)) )  ))) + ( 0.04 * (((x-1)**2) + ((y-2)**2)) )
+     
+    # f = x**2 * y**3
+        
+    r = optimization(f, 5.0, 2.0, TOLERANCE, MAX)
+    
+    print(r)
