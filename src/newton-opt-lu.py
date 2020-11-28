@@ -41,8 +41,8 @@ def gauss_jordan(matrix_a, matrix_b ):
     return sol.xreplace(taus_zeroes)
 
 
-def debug(xy, previous, hessian, jacobian, L, U, gauss_n, gauss_d):
-    ''' signature: debug(xy,previous,hh,jj,L,U,gauss_Lj,gauss_ULj) '''
+def __repr__(xy, previous, hessian, jacobian, L, U, gauss_n, gauss_d):
+    ''' signature: __repr__(xy,previous,hh,jj,L,U,gauss_Lj,gauss_ULj) '''
     print('   Root_n-1')
     pprint(Matrix(previous))
     print('\n   Root_n')
@@ -85,7 +85,8 @@ def optimization(f, cx, cy, tol, nmax) :
         
         if (e._absolute[0] < tol and e._absolute[1] < tol) :
             l.set_header(['X axes', 'Y axes','X-1 axes', 'Y-1 axes',  'absolute error of X axes', 'absolute error Y axes'])
-            l.list2file((PATH+'main-lu'))
+            l.list2file(PATH+'main-lu')
+            l.time(PATH+'time-n-opt-lu')
             return list(xy)
             breakpoint   
         previous = xy
@@ -93,5 +94,6 @@ def optimization(f, cx, cy, tol, nmax) :
 
 
 if __name__ == "__main__" :
-    r = optimization(F, 0.0, 0.0, TOLERANCE, MAX)
+    for i in range(101):
+        r = optimization(F, 0.0, 0.0, TOLERANCE, MAX)
     print(r)
