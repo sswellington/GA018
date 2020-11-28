@@ -17,11 +17,10 @@ from Log import *
     https://www.youtube.com/watch?v=H4rwPpfkPHw
 '''
 
-MAX = 1
+MAX = 20
 PATH = 'log/newton-opt/'
 TOLERANCE = 0.00000001 # 10**(-8)
-
-f = 1 - (exp(-( ( ((x-1)**2)/(2*(0.75**2)) ) + ( ((y-2)**2)/(2*(0.5**2)) )  ))) + ( 0.04 * (((x-1)**2) + ((y-2)**2)) )
+F = 1 - (exp(-( ( ((x-1)**2)/(2*(0.75**2)) ) + ( ((y-2)**2)/(2*(0.5**2)) )  ))) + ( 0.04 * (((x-1)**2) + ((y-2)**2)) )
 
 
 def hessiana(function):
@@ -42,31 +41,32 @@ def gauss_jordan(matrix_a, matrix_b ):
     return sol.xreplace(taus_zeroes)
 
 
-def debug(xy, previous, hessian, jacobian, L, U, gauss_n, gauss_d): 
-        print('   Root_n-1')
-        pprint(Matrix(previous))
-        print('\n   Root_n')
-        pprint(Matrix(xy))
-        print('\n   Hessian')
-        pprint(Matrix(hessian))
-        print('\n   Jacobian')
-        pprint(Matrix(jacobian))
-        print('\n   L')
-        pprint(Matrix(L))
-        print('\n   U')
-        pprint(Matrix(U))
-        print('\n   Gauss D')
-        pprint(Matrix(gauss_d))
-        print('\n   Guass N')
-        pprint(Matrix(gauss_n))
-        print('_____________________________________________________\n')
+def debug(xy, previous, hessian, jacobian, L, U, gauss_n, gauss_d):
+    ''' signature: debug(xy,previous,hh,jj,L,U,gauss_Lj,gauss_ULj) '''
+    print('   Root_n-1')
+    pprint(Matrix(previous))
+    print('\n   Root_n')
+    pprint(Matrix(xy))
+    print('\n   Hessian')
+    pprint(Matrix(hessian))
+    print('\n   Jacobian')
+    pprint(Matrix(jacobian))
+    print('\n   L')
+    pprint(Matrix(L))
+    print('\n   U')
+    pprint(Matrix(U))
+    print('\n   Gauss D')
+    pprint(Matrix(gauss_d))
+    print('\n   Guass N')
+    pprint(Matrix(gauss_n))
+    print('_____________________________________________________\n')
 
 
 def optimization(f, cx, cy, tol, nmax) :
+    l = Log() 
+    e = Error()
     h = hessiana(f)
     j = jacobian_transpose(f)
-    
-    ''' X0  '''
     xy = (Matrix([[cx],[cy]]))
     previous = xy
     
@@ -75,18 +75,23 @@ def optimization(f, cx, cy, tol, nmax) :
         jj = j(float(xy[0]), float(xy[1]))
         L, U, _ = Matrix(hh).LUdecomposition()
         
-        gauss_Lj = gauss_jordan(Matrix(L), Matrix(jj))   
-        gauss_ULj = gauss_jordan(Matrix(U), Matrix(gauss_Lj))  
-        xy =  Matrix(xy) + Matrix(gauss_ULj)
+        gauss = gauss_jordan(Matrix(L), Matrix(-jj))   
+        xy = Matrix(xy) + gauss_jordan(Matrix(U), Matrix(gauss))  
         
-        debug(xy,previous,hh,jj,L,U,gauss_Lj,gauss_ULj)
-                         
+        e.absolute(xy, previous)
+        l.append([float(xy[0]), float(xy[1]), 
+                  float(previous[0]), float(previous[1]), 
+                  float(e._absolute[0]), float(e._absolute[1])])
+        
+        if (e._absolute[0] < tol and e._absolute[1] < tol) :
+            l.set_header(['X axes', 'Y axes','X-1 axes', 'Y-1 axes',  'absolute error of X axes', 'absolute error Y axes'])
+            l.list2file((PATH+'main-lu'))
+            return list(xy)
+            breakpoint   
         previous = xy
-    return (xy)
+    return False
 
 
 if __name__ == "__main__" :
-        
-    r = optimization(f, 0.0, 0.0, TOLERANCE, MAX)
-    
+    r = optimization(F, 0.0, 0.0, TOLERANCE, MAX)
     print(r)

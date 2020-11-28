@@ -1,4 +1,4 @@
-from sympy import lambdify, diff, hessian, jacobi, cos, sin, exp
+from sympy import lambdify, diff, hessian, jacobi, cos, sin, exp, pprint
 from sympy.matrices import Matrix, eye, zeros, ones, diag, GramSchmidt
 from sympy.plotting import plot, plot3d
 from sympy.abc import x,y
@@ -17,9 +17,10 @@ from Log import *
     https://www.youtube.com/watch?v=H4rwPpfkPHw
 '''
 
-MAX = 1
-# PATH = 'log/newton/opt/'
+MAX = 50
+PATH = 'log/newton-opt/'
 TOLERANCE = 0.00000001 # 10**(-8)
+F = 1 - (exp(-( ( ((x-1)**2)/(2*(0.75**2)) ) + ( ((y-2)**2)/(2*(0.5**2)) )  ))) + ( 0.04 * (((x-1)**2) + ((y-2)**2)) )
 
 
 def hessiana(function):
@@ -28,7 +29,7 @@ def hessiana(function):
     return (lambdify([x,y], h))
 
 
-def hessian_inverse(function):
+def hessiana_inverse(function):
     '''  Hessian: init and set  '''
     h = (hessian(function, (x, y))).inv()
     return (lambdify([x,y], h))
@@ -40,32 +41,50 @@ def jacobian_transpose(function):
     return (lambdify([x,y], j))
 
 
+def debug(xy, previous, hessian, jacobian, L, U):
+    ''' signature: debug(xy,previous,hh,jj,L,U,gauss_Lj,gauss_ULj) ''' 
+    print('   Root_n-1')
+    pprint(Matrix(previous))
+    print('\n   Root_n')
+    pprint(Matrix(xy))
+    print('\n   Hessian')
+    pprint(Matrix(hessian))
+    print('\n   Jacobian')
+    pprint(Matrix(jacobian))
+    print('\n   L')
+    pprint(Matrix(L))
+    print('\n   U')
+    pprint(Matrix(U))
+    print('_____________________________________________________\n')
+
+
 def optimization(f, cx, cy, tol, nmax) :
-    h = hessiana(f)
+    l = Log() 
+    e = Error()
+    h = hessiana_inverse(f)
     j = jacobian_transpose(f)
-    
-    ''' X0  '''
     xy = (Matrix([[cx],[cy]]))
-    print('XY =', xy.shape)
+    previous = xy
     
     for n in range(nmax) : 
-        hh = h(float(xy[0]), float(xy[1]))
-        jj = j(float(xy[0]), float(xy[1]))
-        root = (xy) - (Matrix(hh) * Matrix(jj)) 
-        print('hessiana = ',hh.shape )
-        print('jacobian = ',jj.shape)
-        print('kernel', root) 
+        hh = (h(float(xy[0]), float(xy[1])))
+        jj = (j(float(xy[0]), float(xy[1])))
+        xy = Matrix(xy) - (Matrix(hh) * Matrix(jj)) 
         
-        print('kernel =', root)
-        print(xy[0], xy[1])
-        print('hessiana = ',hh)
-        print('jacobian = ',jj)
+        e.absolute(xy, previous)
+        l.append([float(xy[0]), float(xy[1]), 
+                  float(previous[0]), float(previous[1]), 
+                  float(e._absolute[0]), float(e._absolute[1])])
+        
+        if (e._absolute[0] < tol and e._absolute[1] < tol ) :
+            l.set_header(['X axes', 'Y axes','X-1 axes', 'Y-1 axes',  'absolute error of X axes', 'absolute error Y axes'])
+            l.list2file((PATH+'main-inversa'))
+            return list(xy)
+            breakpoint
+        previous = xy
     return (xy)
 
 
-if __name__ == "__main__" :
-    f = 1 - (exp(-( ( ((x-1)**2)/(2*(0.75**2)) ) + ( ((y-2)**2)/(2*(0.5**2)) )  ))) + ( 0.04 * (((x-1)**2) + ((y-2)**2)) )
-        
-    r = optimization(f, 5.0, 2.0, TOLERANCE, MAX)
-    
+if __name__ == "__main__" :        
+    r = optimization(F, 0.0, 0.0, TOLERANCE, MAX)
     print(r)
