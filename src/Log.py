@@ -16,6 +16,12 @@ class Log(object):
         return self._list
     
     
+    def p_time(self):
+        end = time.time()
+        end -= self._start
+        return end 
+    
+    
     def time(self, path):
         end = time.time()
         end -= self._start

@@ -29,7 +29,7 @@ def secant(f, a, b, tol, nmax):
         e.relative(c, previous)
         l.append([c, e._absolute, e._relative, f(a), f(b)])
         if (e._absolute < tol) :
-            l.set_header(['x', 'absolute_error', 'relative_error', 'function(a)', 'function(b)'])
+            l.set_header([('x/time = '+ str(l.p_time())), 'absolute_error', 'relative_error', 'function(a)', 'function(b)'])
             l.list2file((PATH+str(fn)))
             return c
             breakpoint
@@ -44,8 +44,8 @@ def run_test(function, a, b, TOLERANCE, MAX):
 
 if __name__ == "__main__":
     a = 0.5
-    fx = [(cos(x) - x**3), (x**2 - 612), ((x**3)-(2*x)+2), (x**6 - x - 1)]
-    fn = (cos(x) - x**3)
+    fx = [(cos(x) - x**3), (x**2 - 612), (x**3-2*(x**2)+2*x-5),
+          ((x**3)-(2*x)+2), (x**6 - x - 1)]
 
     for f in fx:
         run_test(f, a, a*2, TOLERANCE, MAX)
