@@ -6,16 +6,6 @@ from sympy.abc import x,y
 from Error import * 
 from Log import *
 
-''' Reference
-    https://codetobuy.com/downloads/newton-raphson-optimization-finding-min-or-max/
-    https://docs.scipy.org/doc/scipy/reference/tutorial/optimize.html
-    http://people.duke.edu/~ccc14/sta-663-2016/12_MultivariateOptimizationAlgorithms.html
-    https://sistemas.eel.usp.br/docentes/arquivos/519033/LOM3026/Metodos_numericos_calculo_sistemas_equacoes_nao_lineares.pdf
-    https://en.wikipedia.org/wiki/Newton%27s_method_in_optimization
-    
-    https://andreask.cs.illinois.edu/cs357-s15/public/demos/12-optimization/Newton's%20Method%20in%20n%20dimensions.html
-    https://www.youtube.com/watch?v=H4rwPpfkPHw
-'''
 
 MAX = 50
 PATH = 'log/newton-opt/'

@@ -1,8 +1,7 @@
 from sympy import Symbol, diff, lambdify, sin, cos, tan
+from sympy.abc import x
 
-c = 10
-x = Symbol('x')
-
+a = 10
 f = ((cos(x)) - x**3 )
 dx = f.diff(x)
 
@@ -12,5 +11,5 @@ print(dx)
 f = lambdify(x, f)
 dx = lambdify(x, dx)
 
-print(f(c))
-print(dx(c))
+print(f(a))
+print(dx(a))

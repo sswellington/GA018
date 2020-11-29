@@ -1,6 +1,5 @@
-from sympy import lambdify, diff, hessian, jacobi, cos, sin, exp, pprint
-from sympy.matrices import Matrix, eye, zeros, ones, diag, GramSchmidt
-from sympy.plotting import plot, plot3d
+from sympy import lambdify, diff, hessian, jacobi, cos, sin, pprint
+from sympy.matrices import Matrix
 from sympy.abc import x,y,w,z
 
 from Error import * 
@@ -8,7 +7,7 @@ from Log import *
 
 
 MAX = 20
-PATH = 'log/quase-newton/'
+PATH = 'log/quasi-newton/'
 TOLERANCE = 0.00000001 # 10**(-8)
 
 # L = 1       # lenght
@@ -30,7 +29,7 @@ def __repr__(matrix, weight_lenght, proportionality):
     pprint(matrix) 
     
 
-def quase_newton(fn, cx, tol, nmax) :
+def quase_newton(fn, point, tol, nmax) :
     l = Log()
     e = Error()
     previous = 0
