@@ -21,8 +21,3 @@ class Error(object):
             breakpoint
         self._relative = abs( 1 -  (previous/current))
         return self._relative
-    
-    
-    def absolute_matrix(self, current, previous) :
-        self._absolute = (abs(Matrix(current) - Matrix(previous)))
-        return self._absolute
