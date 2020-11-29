@@ -3,11 +3,13 @@ class Error(object):
     ''' https://en.wikipedia.org/wiki/Approximation_error '''
     _absolute = None
     _relative = None
+    _norm = None
     
     
     def __init__(self):
-        _absolute = -9.9
-        _relative = -9.9 
+        _absolute = -10.987654321
+        _relative = -10.987654321 
+        _norm = -10.987654321
     
     
     def absolute(self, current, previous) :
@@ -21,3 +23,8 @@ class Error(object):
             breakpoint
         self._relative = abs( 1 -  (previous/current))
         return self._relative
+    
+    
+    def matrix_norm(self, a, b) :
+        self._norm = abs(Matrix(a).norm(1) - Matrix(b).norm(1))
+        return self._norm

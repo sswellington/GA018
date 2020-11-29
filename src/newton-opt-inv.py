@@ -71,13 +71,13 @@ def optimization(f, cx, cy, tol, nmax) :
         jj = (j(float(xy[0]), float(xy[1])))
         xy = Matrix(xy) - (Matrix(hh) * Matrix(jj)) 
         
-        e.absolute(xy, previous)
+        e.matrix_norm(xy, previous)
         l.append([float(xy[0]), float(xy[1]), 
                   float(previous[0]), float(previous[1]), 
-                  float(e._absolute[0]), float(e._absolute[1])])
+                  float(e._norm)])
         
-        if (e._absolute[0] < tol and e._absolute[1] < tol ) :
-            l.set_header(['X axes', 'Y axes','X-1 axes', 'Y-1 axes',  'absolute error of X axes', 'absolute error Y axes'])
+        if (e._norm < tol) :
+            l.set_header(['X axes', 'Y axes','X-1 axes', 'Y-1 axes',  'Matrix Norm'])
             l.list2file((PATH+'main-inversa'))
             l.time(PATH+'time-n-opt-inversa')
             return list(xy)
