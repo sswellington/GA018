@@ -30,5 +30,13 @@ def __repr__(matrix, weight_lenght, proportionality):
     pprint(matrix) 
     
 
+def quase_newton(fn, cx, tol, nmax) :
+    l = Log()
+    e = Error()
+    previous = 0
+    
+    return False
+
+
 if __name__ == "__main__" :
     __repr__(M,PL,K)

@@ -62,12 +62,11 @@ def __repr__(xy, previous, hessian, jacobian, L, U, gauss_n, gauss_d):
     print('_____________________________________________________\n')
 
 
-def optimization(f, cx, cy, tol, nmax) :
+def optimization(f, xy, tol, nmax) :
     l = Log() 
     e = Error()
     h = hessiana(f)
     j = jacobian_transpose(f)
-    xy = (Matrix([[cx],[cy]]))
     previous = xy
     
     for n in range(nmax) : 
@@ -76,7 +75,7 @@ def optimization(f, cx, cy, tol, nmax) :
         L, U, _ = Matrix(hh).LUdecomposition()
         
         gauss = gauss_jordan(Matrix(L), Matrix(-jj))   
-        xy = Matrix(xy) + gauss_jordan(Matrix(U), Matrix(gauss))  
+        xy = xy + gauss_jordan(Matrix(U), Matrix(gauss))  
 
         e.matrix_norm(xy, previous)
         l.append([float(xy[0]), float(xy[1]), 
@@ -94,6 +93,7 @@ def optimization(f, cx, cy, tol, nmax) :
 
 
 if __name__ == "__main__" :
+    seed = Matrix([[0.0],[0.0]])
     for i in range(101):
-        r = optimization(F, 0.0, 0.0, TOLERANCE, MAX)
+        r = optimization(F, seed, TOLERANCE, MAX)
     print(r)

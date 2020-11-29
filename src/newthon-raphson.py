@@ -8,7 +8,7 @@ from Log import *
 
 
 MAX = 20
-PATH = 'log/quase-newton/'
+PATH = 'log/newton-raphson/'
 TOLERANCE = 0.00000001 # 10**(-8)
 
 # L = 1       # lenght
@@ -28,6 +28,14 @@ def __repr__(matrix, weight_lenght, proportionality):
     print('PL =', weight_lenght) 
     print(' M', matrix.shape)
     pprint(matrix) 
+
+
+def newton(fn, cx, tol, nmax) :
+    l = Log()
+    e = Error()
+    previous = 0
+    
+    return False
     
 
 if __name__ == "__main__" :

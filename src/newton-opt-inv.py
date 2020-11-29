@@ -58,18 +58,17 @@ def __repr__(xy, previous, hessian, jacobian, L, U):
     print('_____________________________________________________\n')
 
 
-def optimization(f, cx, cy, tol, nmax) :
+def optimization(f, xy, tol, nmax) :
     l = Log() 
     e = Error()
     h = hessiana_inverse(f)
     j = jacobian_transpose(f)
-    xy = (Matrix([[cx],[cy]]))
     previous = xy
     
     for n in range(nmax) : 
         hh = (h(float(xy[0]), float(xy[1])))
         jj = (j(float(xy[0]), float(xy[1])))
-        xy = Matrix(xy) - (Matrix(hh) * Matrix(jj)) 
+        xy = xy - (Matrix(hh) * Matrix(jj)) 
         
         e.matrix_norm(xy, previous)
         l.append([float(xy[0]), float(xy[1]), 
@@ -86,7 +85,8 @@ def optimization(f, cx, cy, tol, nmax) :
     return (xy)
 
 
-if __name__ == "__main__" :        
+if __name__ == "__main__" :  
+    seed = Matrix([[0.0],[0.0]])      
     for i in range(101):
-        r = optimization(F, 0.0, 0.0, TOLERANCE, MAX)
+        r = optimization(F, seed, TOLERANCE, MAX)
     print(r)
