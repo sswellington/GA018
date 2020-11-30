@@ -82,8 +82,8 @@ def quasi_newton(fn, point, tol, nmax) :
             l.set_header(['X axes'  ,'Y axes',  'W axes'  ,'Z axes',
                 'X-1 axes','Y-1 axes','W-1 axes','Z-1 axes',  
                 'Matrix Norm'])
-            l.list2file((PATH+'main'))
-            l.time(PATH+'time-qn-sys')
+            l.list2file((PATH+'main-jab'))
+            l.time(PATH+'time-qn-sys-jab')
             return point
             breakpoint
         previous = point

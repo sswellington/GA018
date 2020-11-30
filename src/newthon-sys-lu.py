@@ -70,7 +70,7 @@ def newton(fn, point, tol, nmax) :
     
 
 if __name__ == "__main__" :
-    seed = Matrix([[0.0],[0.1],[0.2],[0.3]])
+    seed = Matrix([[1],[2],[3],[4]])
     for i in range(101):
         r = newton(M, seed, TOLERANCE, MAX)
     pprint(r)
