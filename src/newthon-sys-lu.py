@@ -61,8 +61,8 @@ def newton(fn, point, tol, nmax) :
             l.set_header(['X axes'  ,'Y axes',  'W axes'  ,'Z axes',
                 'X-1 axes','Y-1 axes','W-1 axes','Z-1 axes',  
                 'Matrix Norm'])
-            l.list2file((PATH+'main-lu'))
-            l.time(PATH+'time-n-sys-lu')
+            l.list2file((PATH+'main-lu-pr'))
+            l.time(PATH+'time-n-sys-lu-pr')
             return point
             breakpoint
         previous = point
@@ -70,7 +70,7 @@ def newton(fn, point, tol, nmax) :
     
 
 if __name__ == "__main__" :
-    seed = Matrix([[1],[2],[3],[4]])
+    seed = Matrix([[1],[1],[1],[1]])
     for i in range(101):
         r = newton(M, seed, TOLERANCE, MAX)
     pprint(r)

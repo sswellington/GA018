@@ -38,25 +38,9 @@ def gauss_jordan(matrix_a, matrix_b ):
 
     
 def quasi_newton(fn, point, tol, nmax) :
-    ''' Quasi-Newton Pag 2020 do livro Cálculo Numérico - Ruggiero
-        Uma vantagem deste método em relação ao método de Newton 
-        é o uso apenas das primeiras derivadas.
-        
-        Quando as Hessianas não estão disponíveis ou 
-        suas fatoraçõess têm custo computacional proibitivo, 
-        o método BFGS é uma boa alternativa ao método de Newton.
-        
-        Convergência - O(n^2)
-            Apesar do método BFGS ser muito robusto na prática, 
-            não podemos estabelecer 
-            resultados de convergência verdadeiramente globais 
-            para funções não-lineares gerais.
-            método BFGS convergem a um ponto estacionário da função 
-            objetivo partindo de qualquer ponto inicial e 
-            qualquer aproximação inicial (razoável) da Hessiana
-        
+    ''' Quasi-Newton Broyden
         Referência    
-            https://sites.icmc.usp.br/andretta/ensino/aulas/sme5720-2-11/quasenewton.pdf
+            Cálculo Numérico - Ruggiero: Pag 2020 do livro 
             https://www.youtube.com/watch?v=wvszn8KlihUs
     '''
     l = Log()
@@ -82,8 +66,8 @@ def quasi_newton(fn, point, tol, nmax) :
             l.set_header(['X axes'  ,'Y axes',  'W axes'  ,'Z axes',
                 'X-1 axes','Y-1 axes','W-1 axes','Z-1 axes',  
                 'Matrix Norm'])
-            l.list2file((PATH+'main-jab'))
-            l.time(PATH+'time-qn-sys-jab')
+            l.list2file((PATH+'main-jab-pr'))
+            l.time(PATH+'time-qn-sys_pr')
             return point
             breakpoint
         previous = point
@@ -92,7 +76,7 @@ def quasi_newton(fn, point, tol, nmax) :
 
 
 if __name__ == "__main__" :
-    seed = Matrix([[1],[2],[3],[4]])
+    seed = Matrix([[1],[1],[1],[1]])
     for i in range(101):
         r =  quasi_newton(M, seed, TOLERANCE, MAX)
     pprint(r)
