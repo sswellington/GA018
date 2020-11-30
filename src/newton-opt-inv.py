@@ -13,22 +13,16 @@ TOLERANCE = 0.00000001 # 10**(-8)
 F = 1 - (exp(-( ( ((x-1)**2)/(2*(0.75**2)) ) + ( ((y-2)**2)/(2*(0.5**2)) )  ))) + ( 0.04 * (((x-1)**2) + ((y-2)**2)) )
 
 
-def hessiana(function):
+def hessiana_inverse(function, c):
     '''  Hessian: init and set  '''
-    h = hessian(function, (x, y))
-    return (lambdify([x,y], h))
+    h = (hessian(function, c)).inv()
+    return (lambdify(c, h))
 
 
-def hessiana_inverse(function):
-    '''  Hessian: init and set  '''
-    h = (hessian(function, (x, y))).inv()
-    return (lambdify([x,y], h))
-
-
-def jacobian_transpose(function):
+def jacobian_transpose(function, c):
     '''  Jacobian: init and set  '''
-    j = (Matrix([function]).jacobian([x,y])).transpose()
-    return (lambdify([x,y], j))
+    j = (Matrix([function]).jacobian(c)).transpose()
+    return (lambdify(c, j))
 
 
 def __repr__(xy, previous, hessian, jacobian, L, U):
@@ -51,8 +45,8 @@ def __repr__(xy, previous, hessian, jacobian, L, U):
 def optimization(f, xy, tol, nmax) :
     l = Log() 
     e = Error()
-    h = hessiana_inverse(f)
-    j = jacobian_transpose(f)
+    h = hessiana_inverse(f, [x,y])
+    j = jacobian_transpose(f, [x,y])
     previous = xy
     
     for n in range(nmax) : 
@@ -68,7 +62,7 @@ def optimization(f, xy, tol, nmax) :
         if (e._norm < tol) :
             l.set_header(['X axes', 'Y axes','X-1 axes', 'Y-1 axes',  'Matrix Norm'])
             l.list2file((PATH+'main-inversa'))
-            l.time(PATH+'time-n-opt-inversa')
+            # l.time(PATH+'time-n-opt-inversa')
             return list(xy)
             breakpoint
         previous = xy
@@ -77,6 +71,6 @@ def optimization(f, xy, tol, nmax) :
 
 if __name__ == "__main__" :  
     seed = Matrix([[0.0],[0.0]])      
-    for i in range(101):
+    for i in range(1):
         r = optimization(F, seed, TOLERANCE, MAX)
     print(r)

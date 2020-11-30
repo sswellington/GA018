@@ -13,16 +13,16 @@ TOLERANCE = 0.00000001 # 10**(-8)
 F = 1 - (exp(-( ( ((x-1)**2)/(2*(0.75**2)) ) + ( ((y-2)**2)/(2*(0.5**2)) )  ))) + ( 0.04 * (((x-1)**2) + ((y-2)**2)) )
 
 
-def hessiana(function):
+def hessiana(function, c):
     '''  Hessian: init and set  '''
-    h = hessian(function, (x, y))
-    return (lambdify([x,y], h))
+    h = hessian(function, c)
+    return (lambdify(c, h))
 
 
-def jacobian_transpose(function):
+def jacobian_transpose(function, c):
     '''  Jacobian: init and set  '''
-    j = (Matrix([function]).jacobian([x,y])).transpose()
-    return (lambdify([x,y], j))
+    j = (Matrix([function]).jacobian(c)).transpose()
+    return (lambdify(c, j))
 
 
 def gauss_jordan(matrix_a, matrix_b ):
@@ -55,8 +55,8 @@ def __repr__(xy, previous, hessian, jacobian, L, U, gauss_n, gauss_d):
 def optimization(f, xy, tol, nmax) :
     l = Log() 
     e = Error()
-    h = hessiana(f)
-    j = jacobian_transpose(f)
+    h = hessiana(f,[x,y])
+    j = jacobian_transpose(f,[x,y])
     previous = xy
     
     for n in range(nmax) : 
@@ -76,7 +76,7 @@ def optimization(f, xy, tol, nmax) :
             l.set_header(['X axes', 'Y axes','X-1 axes', 'Y-1 axes',  'Matrix Norm'])
             l.list2file(PATH+'main-lu')
             l.time(PATH+'time-n-opt-lu')
-            return list(xy)
+            return xy
             breakpoint   
         previous = xy
     return False
@@ -84,6 +84,6 @@ def optimization(f, xy, tol, nmax) :
 
 if __name__ == "__main__" :
     seed = Matrix([[0.0],[0.0]])
-    for i in range(101):
+    for i in range(1):
         r = optimization(F, seed, TOLERANCE, MAX)
     print(r)

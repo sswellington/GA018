@@ -26,9 +26,9 @@ def __repr__(matrix, weight_lenght, proportionality):
     pprint(matrix) 
     
 
-def jacobian_inversa(f, c):
+def jacobian_inversa(function, c):
     '''  Jacobian: init and set  '''
-    j = (Matrix(f).jacobian(c)).inv()
+    j = (Matrix(function).jacobian(c)).inv()
     return (lambdify(c, j))
 
 
