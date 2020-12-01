@@ -1,84 +1,46 @@
-from sympy import lambdify, diff, hessian, jacobi, cos, sin, exp, pprint
-from sympy.matrices import Matrix, eye, zeros, ones, diag, GramSchmidt
-from sympy.plotting import plot, plot3d
-from sympy.abc import x,y
+# from sympy import lambdify, diff, hessian, jacobi, cos, sin, exp, pprint
+# from sympy.matrices import Matrix, eye, zeros, ones, diag, GramSchmidt
+# from sympy.abc import x,y,w,z
 
+from Linear_system import *
 from Error import * 
 from Log import *
 
 
 MAX = 20
 PATH = 'log/newton-opt/'
-TOLERANCE = 0.00000001 # 10**(-8)
+TOLERANCE = 0.00000001  # 10**(-8)
 F = 1 - (exp(-( ( ((x-1)**2)/(2*(0.75**2)) ) + ( ((y-2)**2)/(2*(0.5**2)) )  ))) + ( 0.04 * (((x-1)**2) + ((y-2)**2)) )
 
 
-def hessiana(function, c):
-    '''  Hessian: init and set  '''
-    h = hessian(function, c)
-    return (lambdify(c, h))
-
-
-def jacobian_transpose(function, c):
-    '''  Jacobian: init and set  '''
-    j = (Matrix([function]).jacobian(c)).transpose()
-    return (lambdify(c, j))
-
-
-def gauss_jordan(matrix_a, matrix_b ):
-    sol, params = matrix_a.gauss_jordan_solve(matrix_b)
-    taus_zeroes = { tau:0 for tau in params }
-    return sol.xreplace(taus_zeroes)
-
-
-def __repr__(xy, previous, hessian, jacobian, L, U, gauss_n, gauss_d):
-    ''' signature: __repr__(xy,previous,hh,jj,L,U,gauss_Lj,gauss_ULj) '''
-    print('   Root_n-1')
-    pprint(Matrix(previous))
-    print('\n   Root_n')
-    pprint(Matrix(xy))
-    print('\n   Hessian')
-    pprint(Matrix(hessian))
-    print('\n   Jacobian')
-    pprint(Matrix(jacobian))
-    print('\n   L')
-    pprint(Matrix(L))
-    print('\n   U')
-    pprint(Matrix(U))
-    print('\n   Gauss D')
-    pprint(Matrix(gauss_d))
-    print('\n   Guass N')
-    pprint(Matrix(gauss_n))
-    print('_____________________________________________________\n')
-
-
-def optimization(f, xy, tol, nmax) :
+def optimization(fn, point, tol, nmax) :
     l = Log() 
     e = Error()
-    h = hessiana(f,[x,y])
-    j = jacobian_transpose(f,[x,y])
-    previous = xy
+    ls = Linear_system()
+    h = ls.hessiana(fn,[x,y])
+    j = ls.jacobiana_transpose(fn,[x,y])
+    previous = point
     
     for n in range(nmax) : 
-        hh = h(float(xy[0]), float(xy[1]))
-        jj = j(float(xy[0]), float(xy[1]))
+        hh = h(float(point[0]), float(point[1]))
+        jj = j(float(point[0]), float(point[1]))
         L, U, _ = Matrix(hh).LUdecomposition()
         
-        gauss = gauss_jordan(Matrix(L), Matrix(-jj))   
-        xy = xy + gauss_jordan(Matrix(U), Matrix(gauss))  
-
-        e.matrix_norm(xy, previous)
-        l.append([float(xy[0]), float(xy[1]), 
-                  float(previous[0]), float(previous[1]), 
-                  float(e._norm)])
+        gauss = ls.gauss_jordan(Matrix(L), Matrix(-jj))   
+        point = point + ls.gauss_jordan(Matrix(U), Matrix(gauss))  
+        e.matrix_norm(point, previous)
+        
+        # l.append([float(point[0]), float(point[1]), 
+        #           float(previous[0]), float(previous[1]), 
+        #           float(e._norm)])
         
         if (e._norm < tol) :
-            l.set_header(['X axes', 'Y axes','X-1 axes', 'Y-1 axes',  'Matrix Norm'])
-            l.list2file(PATH+'main-lu')
-            l.time(PATH+'time-n-opt-lu')
-            return xy
+            # l.set_header(['X axes', 'Y axes','X-1 axes', 'Y-1 axes',  'Matrix Norm'])
+            # l.list2file(PATH+'main-lu')
+            # l.time(PATH+'time-n-opt-lu')
+            return point
             breakpoint   
-        previous = xy
+        previous = point
     return False
 
 
@@ -86,4 +48,4 @@ if __name__ == "__main__" :
     seed = Matrix([[0.0],[0.0]])
     for i in range(1):
         r = optimization(F, seed, TOLERANCE, MAX)
-    print(r)
+    pprint(r)
