@@ -1,6 +1,6 @@
 # from sympy import lambdify, diff, hessian, jacobi, cos, sin, exp, pprint
 # from sympy.matrices import Matrix, eye, zeros, ones, diag, GramSchmidt
-# from sympy.abc import x,y,w,z
+from sympy.abc import x,y,w,z
 
 from Linear_system import *
 from Error import * 
@@ -20,7 +20,7 @@ M = Matrix([[K * (x    ) - ((7 * PL) / 2 ) * cos(x) - K * (y - x)],
 
 
 def newton(fn, point, tol, nmax) :
-    l = Log()
+    # l = Log()
     e = Error()
     ls = Linear_system()
     j = ls.jacobiana(fn,[x,y,w,z])
@@ -41,8 +41,8 @@ def newton(fn, point, tol, nmax) :
         
         if (e._norm < tol) :
             # l.set_header(['X axes'  ,'Y axes',  'W axes'  ,'Z axes',
-            #     'X-1 axes','Y-1 axes','W-1 axes','Z-1 axes',  
-            #     'Matrix Norm'])
+            #             'X-1 axes','Y-1 axes','W-1 axes','Z-1 axes',  
+            #             'Matrix Norm'])
             # l.list2file((PATH+'main-lu-pr'))
             # l.time(PATH+'time-n-sys-lu-pr')
             return point

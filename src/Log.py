@@ -1,5 +1,5 @@
-import csv
 import sys
+import csv
 import time
 
 
@@ -13,16 +13,12 @@ class Log(object):
 
 
     def __repr__(self):
+        ''' Return log file '''
         return self._list
     
     
-    def p_time(self):
-        end = time.time()
-        end -= self._start
-        return end 
-    
-    
     def time(self, path):
+        ''' Return program execution time '''
         end = time.time()
         end -= self._start
         f = open(path+'.txt', 'a')
@@ -33,14 +29,32 @@ class Log(object):
 
 
     def set_header(self, header): 
+        ''' set header of log file
+                            
+            Parameters
+            ==========
+                header
+        '''
         self._header = header
     
     
     def append(self, value): 
-        self._list.append( value)
+        ''' Append value to the end of the log file 
+                            
+            Parameters
+            ==========
+                value
+        '''
+        self._list.append(value)
         
     
     def list2file(self, path):
+        ''' Convert list to log file format .csv
+                            
+            Parameters
+            ==========
+                path: log file destination
+        '''
         with open(path+'.csv', 'w', newline='') as csvfile:
             spamwriter = csv.writer(csvfile, delimiter=',',
                                     quotechar='|', quoting=csv.QUOTE_MINIMAL)

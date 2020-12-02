@@ -1,6 +1,6 @@
 # from sympy import lambdify, diff, hessian, jacobi, cos, sin, pprint
 # from sympy.matrices import Matrix
-# from sympy.abc import x,y,w,z
+from sympy.abc import x,y,w,z
 
 from Linear_system import *
 from Error import * 
@@ -20,12 +20,7 @@ M = Matrix([[K * (x    ) - ((7 * PL) / 2 ) * cos(x) - K * (y - x)],
 
     
 def quasi_newton(fn, point, tol, nmax) :
-    ''' Quasi-Newton Broyden
-        Referência    
-            Cálculo Numérico - Ruggiero: Pag 2020 do livro 
-            https://www.youtube.com/watch?v=wvszn8KlihUs
-    '''
-    l = Log()
+    # l = Log()
     e = Error()
     ls = Linear_system()
     j = ls.jacobiana(fn,[x,y,w,z])

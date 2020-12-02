@@ -1,6 +1,6 @@
 # from sympy import lambdify, diff, hessian, jacobi, cos, sin, exp, pprint
 # from sympy.matrices import Matrix, eye, zeros, ones, diag, GramSchmidt
-# from sympy.abc import x,y,w,z
+from sympy.abc import x,y,w,z
 
 from Linear_system import *
 from Error import * 
@@ -20,7 +20,7 @@ M = Matrix([[K * (x    ) - ((7 * PL) / 2 ) * cos(x) - K * (y - x)],
     
 
 def newton(fn, point, tol, nmax) :
-    l = Log()
+    # l = Log()
     e = Error()
     ls = Linear_system()
     j = ls.jacobiana_inverse(fn,[x,y,w,z])

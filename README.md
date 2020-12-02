@@ -9,7 +9,7 @@
 ### Sistema linear
 * Equação diferencial ordinário
 * Eliminação Gaussiana
-* Fatorização LU
+* Decomposição LU
 * Método da matriz tridiagonal
 * Condicionamento de sistemas lineares
 * Sistema de Equações Lineares
@@ -61,6 +61,9 @@
 * Valores singulares
 * Autovalores
 * Matriz inversa
+* Matriz jacobiana
+* Matriz Hessiana
+* Norma de Matriz
 * Menor complemento
 * Número de Condicionamento
 * Coeficiente da matriz

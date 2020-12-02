@@ -1,6 +1,6 @@
 # from sympy import lambdify, diff, hessian, jacobi, cos, sin, exp, pprint
 # from sympy.matrices import Matrix, eye, zeros, ones, diag, GramSchmidt
-# from sympy.abc import x,y,w,z
+from sympy.abc import x,y,w,z
 
 from Linear_system import *
 from Error import * 
@@ -14,7 +14,7 @@ F = 1 - (exp(-((((x-1)**2)/(2*(0.75**2)))+(((y-2)**2)/(2*(0.5**2))))))+(0.04*(((
 
 
 def optimization(fn, point, tol, nmax) :
-    l = Log() 
+    # l = Log() 
     e = Error()
     ls = Linear_system()
     h = ls.hessiana_inverse(fn, [x,y])
