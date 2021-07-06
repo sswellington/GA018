@@ -1,0 +1,42 @@
+\section{Método de Newton na Otimização}
+
+\begin{equation} \label{eq:nr-opt}
+\begin{split}
+    f(x,y) = 1 - 
+    e^{\left( - 
+        \frac{(x-1)^2}{2*(\frac{3}{4})^2}
+        +
+        \frac{(y-1)^2}{2*(\frac{1}{2})^2}
+    \right)}
+    + \frac{1}{25} * \left(  (x-1)^2 + (y - 2)^2 \right)
+\end{split}
+\end{equation}
+
+Neste capítulo será aplicado Método de Newton para encontrar o mínimo da Equação~\ref{eq:nr-opt}.
+
+\subsection{Deduzir o método de Newton para o caso bidimensional}
+
+O método de Newton é utilizado para encontrar as raízes de uma função através da fórmula iterativas e aproximações. 
+Esse método é útil quando não for possível encontrar as raízes de uma determinada função analiticamente.
+Para usar o método na função de uma variável, basta encontrar os pontos em que $f(x) = 0$, através da raiz de uma aproximação linear de $F$ em um dado ponto inicial $x_0$. Ou seja, se r é a reta tangente a função no ponto $x_0$, então o próximo ponto $x_1$ do método seria o ponto em que $r(x1) = 0$ pois é onde a aproximação linear se anula. E esse processo ocorre até se encontrar o melhor ponto para a raiz de $F$. 
+A reta tangente no ponto  $(x_0, f(x_0))$ pode dar uma aproximação linear da função $f$ no ponto $x-0$, vide a Equação~\ref{eq:newton}\cite{ruggiero2000calculo}
+
+Seja $F : \mathbb{R}^2 \to \mathbb{R}^2, F = (f_1, ... , f_n $,   que possui objetivo de encontrar as soluções aproximadas para $F(x,y) = 0$ 
+De uma forma equivalente a que foi realizado para funções de uma variável, considere $(x_0, y_0) \in \mathbb{R}^2$ um ponto inicial uma
+aproximação linear de $F$ em torno de $(x_0, y_0)$.
+A partir do momento em que é encontrado $(x_1, y_1)$, é obtida a aproximação linear de F no ponto $(x_1, y_1)$. O ponto seguinte $(x_2, y_2)$ será aquele que anula esta aproximação linear, e assim será repetido o processo iterativamente. 
+Portanto, dado $i \in \mathbb{R}$ e um ponto $(x_i, y_i) \in \mathbb{R}^2$ o novo iterando $(x_{i+1}, y_{i+1}) \in \mathbb{R}^2$ obtido pelo método de Newton. Sendo $J$ a matriz jacobiana
+\cite{ruggiero2000calculo}.
+
+\begin{equation} \label{eq:newton}
+\begin{split}
+    x_{1} = x_1 - \frac{f(x_0)}{f'(x_0)} 
+    \\
+    x_{1} = x_1 -J(x_0)^{-1} F(x_0)
+    \\
+    J(x)(x_1- x_0) = -F(x_0) 
+\end{split}
+\end{equation}
+
+
+

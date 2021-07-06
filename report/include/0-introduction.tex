@@ -1,0 +1,103 @@
+\section{Introdução}
+
+% \subsection{Teoria geral para métodos iterativos}
+
+% - Erro Absoluto e Relativo 
+
+% \cite{decio2003}
+
+
+% \subsection{Sistema de equação linear}
+% \cite{decio2003} 
+
+% \subsubsection{Eliminação de Gauss-Jordan}
+
+% \subsubsection{Decomposição LU}
+% \cite{gene2013}
+
+% \subsubsection{Matriz Inversa}
+% \cite{franco2006}
+
+% \subsubsection{Matriz Transposta}
+% \cite{franco2006}
+
+% \subsubsection{Matriz Jacobiana}
+% \cite{umetani1989jacobian_matrix}
+% \cite{ruggiero2000calculo}
+
+% \subsection{Matriz Hessiana}
+% \cite{callahan2010hessian}
+
+% \subsection{Norma matricial}
+% \cite{gene2013}
+
+
+% \subsection{Método de Newton-Raphson}
+% \subsection{Quase-Newton}
+% \subsection{Método de Newton-Raphson para Otimização}
+
+
+
+
+As Bibliotecas utilizadas para o trabalhos são relacionadas ao projeto do Sympy\footnote{https://www.sympy.org/}.
+O uso da biblioteca relacionado ao Sympy está representada pelo Algoritmo~\ref{alg:sympy} e os métodos para solução linear são implementados pelo Algoritmo~\ref{alg:metodos}, tendo por exemplo a Matriz Hessiana, a Matriz Jacobiana e a Eliminação de Gauss~\cite{franco2006,gene2013}.
+Além disso, as classes Log e Error para auxiliar na implementação do métodos numéricos~\cite{decio2003}.
+O primeiro, empregado para gerar o arquivo de log do algoritmo executado e informação do tempo de execução do método estudado, vide Algoritmo~\ref{alg:log}.
+Por fim, usado para o cálculo de erro absoluto, relativo e também do cálculo da norma da matriz, vide o Algoritmo~\ref{alg:log}.
+Portanto, o código fonte e os dados gerados pelos métodos estão disponível no Github~\footnote{https://github.com/sswellington/GA018}.
+
+
+\begin{listing}[!h]
+\caption{Biblioteca Sympy}
+\label{alg:sympy}
+\inputminted
+[
+    frame=lines,
+    framesep=2mm,
+    baselinestretch=1.2,
+    linenos
+]
+{python}{code/sympy.py}
+\end{listing}
+
+
+\begin{listing}[!h]
+\caption{Sistema Lineares}
+\label{alg:metodos}
+\inputminted
+[
+    frame=lines,
+    framesep=2mm,
+    baselinestretch=1.2,
+    linenos
+]
+{python}{code/methods.py}
+\end{listing}
+
+
+\begin{listing}[!h]
+\caption{Classe Log}
+\label{alg:log}
+\inputminted
+[
+    frame=lines,
+    framesep=2mm,
+    baselinestretch=1.2,
+    linenos
+]
+{python}{code/Log.py}
+\end{listing}
+
+
+\begin{listing}[!h]
+\caption{Classe Error}
+\label{alg:error}
+\inputminted
+[
+    frame=lines,
+    framesep=2mm,
+    baselinestretch=1.2,
+    linenos
+]
+{python}{code/Error.py}
+\end{listing}

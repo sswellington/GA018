@@ -1,0 +1,58 @@
+\documentclass[oneside, 12pt, a4paper, article, brazil]{abntex2}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[alf, bibjustif]{abntex2cite}
+
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{amsmath}
+\usepackage{pdfpages}
+\usepackage[version=3]{mhchem}
+
+\usepackage{minted}
+\usemintedstyle{colorful}
+\usepackage[portuguese,linesnumbered]{algorithm2e}
+\let\oldnl\nl
+\newcommand{\nonl}{\renewcommand{\nl}{\let\nl\oldnl}}
+
+\usepackage{siunitx}
+\usepackage{amsfonts}
+\usepackage{xspace}
+\usepackage[brazil]{babel}
+\usepackage{indentfirst}
+\usepackage{pslatex} %fonte times new roman
+
+\usepackage{color}
+\usepackage{multicol}
+\usepackage[normalem]{ulem}
+\usepackage{wrapfig}
+\usepackage{caption}
+\usepackage{hyphenat}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{afterpage}
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{array}
+\usepackage{xcolor}
+
+\DeclareFontFamily{\encodingdefault}{\ttdefault}{\hyphenchar\font=`\-}
+
+\hyphenation{agru-pa-mento}
+
+\newcommand\blankpage{
+    \null
+    \thispagestyle{empty}
+    \addtocounter{page}{-1}
+\newpage}
+
+%\input{Pre-texto/SimQuerySymbols}
+\def\kNN {$k$\mbox{-}NN\xspace}
+\def\S {\mathcal{S}\xspace}
+\newtheorem{definition}{Definição}
+\newtheorem{lemma}{Lema}
+
+\def\system{\texttt{2PLA}\xspace}
+\def\dataset{\texttt{ULCER\_SET}\xspace}
+

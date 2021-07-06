@@ -1,0 +1,72 @@
+\subsubsection{Resultado do Método Quasi-Newton}
+O Método Quasi-Newton aplicado a Equação~\ref{eq:2}, tendo a precisão de $10^{-8}$ e ponto de partida o ponto $x_{0} = (1,1,1,1)$ o resultado está disponível na Tabela~\ref{tab:sys-qn}, no qual representa todas iterações do Método. 
+
+
+
+\begin{table}[!htp]
+\caption{Método Quasi-Newton para aproximação dos ângulos $\theta_1,~\theta_2,~\theta_3,~\theta_4$}
+\label{tab:sys-qn}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\textbf{K}              &  \textbf{Ângulo $\theta_1$} &  \textbf{Ângulo $\theta_2$} &  \textbf{Ângulo $\theta_3$} &  \textbf{Ângulo $\theta_4$} & \textbf{Norma da Matriz} \\ \hline
+1                       & 1               & 1               & 1               & 1               & 0,09247623274            \\ \hline
+2                       & 0,7203879844    & 1,033592424     & 1,154783643     & 1,183712181     & 0,02700406424            \\ \hline
+3                       & 0,712694052     & 1,027425471     & 1,148309993     & 1,177042652     & 0,000453052468           \\ \hline
+4                       & 0,7123318101    & 1,02728699      & 1,148314367     & 1,17708595      & 0,00005325202152         \\ \hline
+\multicolumn{1}{|l|}{5} & 0,7123119537    & 1,027274207     & 1,148303874     & 1,177075829     & 0,000001875314228        \\ \hline
+\multicolumn{1}{|l|}{6} & 0,7123109468    & 1,027273707     & 1,148303654     & 1,177075681     & 0,0000001255222459       \\ \hline
+\multicolumn{1}{|l|}{7} & 0,7123108933    & 1,027273676     & 1,148303632     & 1,177075661     & 0,000000005706309203     \\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Conclusão}
+A comparação entre o Método de Newton e o Método Quasi-Newton envolve diversos fatores. 
+Em geral, o Método Quasi-Newton exige menor custo computacional em relação ao Método de Newton, em visto que o Quasi-Newton Boyde não utiliza derivada para obter a aproximação.
+Entretanto, o Método Quasi-Newton possui mais iterações, além de ser mais dependente do ponto inicial que o Método de Newton, podendo assim demorar mais ou mesmo não convergir.
+Ao realizar os teste para o ponto mais distante da raiz o Método Quasi-Newton realiza mais que o dobro de iterações que o Método de Newton vide a Tabela~\ref{tab:sys-nr-qn} em comparação a Tabela~\ref{tab:sys-qn-nr} 
+
+\begin{table}[!htp]
+\caption{Método de Newton para aproximação dos ângulos $\theta_1,~\theta_2,~\theta_3,~\theta_4$, tendo ponto inicial = $(1,2,3,4)$}
+\label{tab:sys-nr-qn}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\textbf{K}              & \textbf{Ângulo $\theta_1$} & \textbf{Ângulo $\theta_2$} & \textbf{Ângulo $\theta_3$} & \textbf{Ângulo $\theta_4$} & \textbf{Norma da Matriz} \\ \hline
+1                       & 1                          & 2                          & 3                          & 4                          & 8,800845906              \\ \hline
+2                       & 0,4743766868               & 0,4328888603               & 0,01309229993              & -0,2787962474              & 4,716893296              \\ \hline
+3                       & 0,8899125749               & 1,41244724                 & 1,748667692                & 1,865019884                & 1,825360327              \\ \hline
+4                       & 0,7181529221               & 1,035762302                & 1,154749038                & 1,182022803                & 0,02568589428            \\ \hline
+\multicolumn{1}{|l|}{5} & 0,7123182123               & 1,02728409                 & 1,148313579                & 1,177085289                & 0,00003731266287         \\ \hline
+\multicolumn{1}{|l|}{6} & 0,7123108904               & 1,027273674                & 1,148303632                & 1,177075661                & 0                        \\ \hline
+\multicolumn{1}{|l|}{7} & 0,7123108933               & 1,027273676                & 1,148303632                & 1,177075661                & 0,000000005706309203     \\ \hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[!htp]
+\caption{Método Quasi-Newton para aproximação dos ângulos $\theta_1,~\theta_2,~\theta_3,~\theta_4$, tendo ponto inicial = $(1,2,3,4)$}
+\label{tab:sys-qn-nr}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\textbf{K} & \textbf{Ângulo $\theta_1$} & \textbf{Ângulo $\theta_2$} & \textbf{Ângulo $\theta_3$} & \textbf{Ângulo $\theta_4$} & \textbf{Norma da Matriz} \\ \hline
+1  & 1            & 2            & 3             & 4             & 8,800845906          \\ \hline
+2  & 0,4743766868 & 0,4328888603 & 0,01309229993 & -0,2787962474 & 4,123504199          \\ \hline
+3  & 0,773266324  & 1,211545553  & 1,574927102   & 1,762919314   & 2,312279199          \\ \hline
+4  & 0,6407698264 & 0,8472990284 & 0,7977852189  & 0,7245250207  & 1,743217113          \\ \hline
+5  & 0,7556849842 & 1,141277512  & 1,378859023   & 1,477774688   & 1,229316534          \\ \hline
+6  & 0,6762538242 & 0,9353211357 & 0,9679975809  & 0,9447071324  & 0,9192274459         \\ \hline
+7  & 0,7366821104 & 1,090600278  & 1,274881539   & 1,341343192   & 0,6689558152         \\ \hline
+.  & .            & .            & .             & .             & .                    \\ \hline
+.  & .            & .            & .             & .             & .                    \\ \hline
+.  & .            & .            & .             & .             & .                    \\ \hline
+68 & 0,7123108901 & 1,027273674  & 1,14830363    & 1,177075659   & 0,000000008481138458 \\ \hline
+\end{tabular}
+\end{table}
+
+\newpage
+Portanto, neste caso o Método de Newton demandou menos recurso computacional que o O Método Quasi-Newton.
+Tal hipótese se confirma ao analisar o tempo de execução de cada método, 
+o Método Quasi-Newton obteve a média $0,7413711548$ segundos e o desvio padrão $0,08539475997$.
+Já, o Método de Newton obteve a média $0,1109697819$ segundos e o desvio padrão $0,03354966481$.
+Além disso, com o ponto inicial $(1,1,1,1)$ o Método de Newton foi superior ao Método Quasi-Newto, obtendo à média $0,08055830002$ segundos e o desvio padrão $0,03348963636$ contra a média $ 0,09879040718 $ segundos e o  $ 0,03627166764 $ desvio padrão.
+
+Logo, confirma que neste caso o método de Newton se destacou em relação ao Método Quasi-Newton Broyden, sendo desvantagem do Método Quasi-Newton Broyden realizar aproximação por apenas um lado da reta em vista que a mantém a matriz Jacobina Fixa desda primeira iteração, de forma a iterar apenas a Função~\cite{ruggiero2000calculo}.

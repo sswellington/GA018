@@ -1,0 +1,32 @@
+\subsection{Quasi-Newton}
+Código computacional para aproximar $\theta_1,~\theta_2,~\theta_3,~\theta_4$ Métodos Quasi-Newton.
+Existem diversos Métodos Quasi-Newton, neste trabalho será utilizado o Método Quasi-Newton Broyden.
+
+
+
+\begin{listing}[ht]
+\caption{Método Quasi-Newton Broyden}
+\label{alg:qn}
+\inputminted
+[
+    frame=lines,
+    framesep=2mm,
+    baselinestretch=1.2,
+    linenos
+]
+{python}{code/qn-broyden.py}
+\end{listing}
+
+
+\begin{listing}[ht]
+\caption{Execução do Método Newton e Quasi-Newton Broyden}
+\label{alg:main-qn}
+\inputminted
+[
+    frame=lines,
+    framesep=2mm,
+    baselinestretch=1.2,
+    linenos
+]
+{python}{code/main-sys.py}
+\end{listing}
