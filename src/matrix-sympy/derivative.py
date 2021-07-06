@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from sympy import Symbol, diff, lambdify, sin, cos, tan
 from sympy.abc import x
 

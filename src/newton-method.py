@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 ''' Método de Newton: encontrar o mínimo dessa função '''
 
 from sympy import lambdify, diff, cos, sin, exp
@@ -63,5 +65,3 @@ if __name__ == "__main__":
         
         # graph = plot3d(f, show=False)
         # graph.save('view/function/3D/'+str(f))
-
-        

@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from sympy.matrices import Matrix, eye, zeros, ones, diag, GramSchmidt
 
 ''' LU decomposition

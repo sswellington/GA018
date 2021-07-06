@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from sympy.matrices import Matrix
 
 
@@ -53,3 +55,4 @@ class Error(object):
         '''
         self._norm = abs(Matrix(a).norm(1) - Matrix(b).norm(1))
         return self._norm
+    

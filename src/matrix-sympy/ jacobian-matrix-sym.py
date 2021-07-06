@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from sympy import lambdify, diff, Matrix, cos, sin, exp, pprint
 from sympy.plotting import plot, plot3d
 from sympy.abc import x,y

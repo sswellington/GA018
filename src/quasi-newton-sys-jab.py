@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 # from sympy import lambdify, diff, hessian, jacobi, cos, sin, pprint
 # from sympy.matrices import Matrix
 from sympy.abc import x,y,w,z
@@ -58,3 +60,4 @@ if __name__ == "__main__" :
     for i in range(1):
         r =  quasi_newton(M, seed, TOLERANCE, MAX)
     pprint(r)
+    

@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from sympy import lambdify, diff, cos, sin
 from sympy.abc import x
 
@@ -49,3 +51,4 @@ if __name__ == "__main__":
 
     for f in fx:
         run_test(f, a, a*2, TOLERANCE, MAX)
+        

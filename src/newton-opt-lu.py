@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 # from sympy import lambdify, diff, hessian, jacobi, cos, sin, exp, pprint
 # from sympy.matrices import Matrix, eye, zeros, ones, diag, GramSchmidt
 from sympy.abc import x,y,w,z
@@ -49,3 +51,4 @@ if __name__ == "__main__" :
     for i in range(1):
         r = optimization(F, seed, TOLERANCE, MAX)
     pprint(r)
+    

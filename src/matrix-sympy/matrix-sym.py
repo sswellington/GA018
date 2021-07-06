@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from sympy import Symbol
 from sympy.interactive.printing import init_printing
 from sympy.matrices import Matrix, eye, zeros, ones, diag, GramSchmidt

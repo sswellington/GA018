@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from sympy import jacobi, S, conjugate, diff
 from sympy.abc import a, b, n, x
 

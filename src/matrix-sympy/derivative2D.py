@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from sympy import *
 from sympy.abc import x, y
 
@@ -15,3 +17,4 @@ if __name__ == "__main__":
     
     a = diff2D(f)
     print(a(2,5))
+    

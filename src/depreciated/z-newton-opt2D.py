@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from sympy import *
 from sympy.abc import x, y
 
@@ -41,5 +43,4 @@ if __name__ == "__main__" :
 
     fn = (lambdify(['x','y'], fn))
     print(fn(1,1))
-    
     

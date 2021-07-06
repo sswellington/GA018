@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import math
 import numpy as np
 import matplotlib.pyplot as plt
@@ -82,3 +84,4 @@ if __name__ == "__main__":
     print(result)
     result = str(int(result*10000))
     graph(result)
+    

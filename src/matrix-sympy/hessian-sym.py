@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from sympy import Function, lambdify, diff, hessian, pprint
 from sympy.abc import x, y
 
@@ -27,8 +29,3 @@ if __name__ == "__main__" :
     print(h(5, 2))
     
     # pprint((hessian(f, (x, y))).inv())
-
-    
-
-    
-    

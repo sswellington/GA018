@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import sys
 import csv
 import time
@@ -61,3 +63,4 @@ class Log(object):
             spamwriter.writerow(self._header)
             for l in (self._list) :
                 spamwriter.writerow(l)
+                

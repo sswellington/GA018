@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from sympy import chebyshevt, chebyshevu, diff
 from sympy.abc import n,x
 

@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 ''' Método de Newton: encontrar o mínimo dessa função '''
 
 from sympy import lambdify, diff, cos, sin, exp
@@ -61,3 +63,4 @@ if __name__ == "__main__":
    
     for f in fx:
         run_test(f, a, TOLERANCE, MAX)
+        

@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from sympy import symbols, cos
 from sympy.codegen.algorithms import newtons_method_function
 from sympy.codegen.pyutils import render_as_module
